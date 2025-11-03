@@ -142,8 +142,53 @@ jobs:
           fi
 
       - name: Wait for SonarCloud Quality Gate
-        uses: sonarsource/sonarcloud-github-action@master
-        with:
-          args: /report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+        run: |
+          set -e
+          # ensure jq is available
+          if ! command -v jq >/dev/null 2>&1; then
+            echo "jq not found, installing..."
+            sudo apt-get update -y && sudo apt-get install -y jq
+          fi
+          REPORT=target/sonar/report-task.txt
+          if [ ! -f "$REPORT" ]; then
+            echo "report-task.txt not found at $REPORT"
+            echo "Directory listing:" && ls -la target/sonar || true
+            exit 1
+          fi
+          echo "Found report-task.txt:" && cat $REPORT
+          CE_URL=$(grep -E '^ceTaskUrl=' $REPORT | cut -d'=' -f2)
+          if [ -z "$CE_URL" ]; then
+            echo "ceTaskUrl not found in report-task.txt" && exit 1
+          fi
+          CE_ID=$(basename "$CE_URL")
+          echo "Waiting for Compute Engine task: $CE_ID"
+          # Poll CE task status
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            echo "Poll #$i"
+            resp=$(curl -s -u "$SONAR_TOKEN": "$SONAR_HOST_URL/api/ce/task?id=$CE_ID")
+            status=$(echo "$resp" | jq -r '.task.status')
+            echo "CE status: $status"
+            if [ "$status" = "SUCCESS" ] || [ "$status" = "FAILED" ] || [ "$status" = "CANCELED" ]; then
+              break
+            fi
+            sleep 5
+          done
+          if [ "$status" != "SUCCESS" ]; then
+            echo "Analysis task did not finish successfully: $status"
+            echo "CE response: $resp"
+            exit 1
+          fi
+          ANALYSIS_ID=$(echo "$resp" | jq -r '.task.analysisId')
+          echo "Analysis id: $ANALYSIS_ID"
+          # Get quality gate status
+          qresp=$(curl -s -u "$SONAR_TOKEN": "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId=$ANALYSIS_ID")
+          gate=$(echo "$qresp" | jq -r '.projectStatus.status')
+          echo "Quality gate status: $gate"
+          echo "$qresp" | jq '.' || true
+          if [ "$gate" != "OK" ]; then
+            echo "Quality Gate failed: $gate"
+            exit 1
+          fi
