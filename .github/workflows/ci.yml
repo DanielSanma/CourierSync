@@ -33,11 +33,37 @@ jobs:
         run: |
           mvn -B clean verify
 
-      - name: Upload build artifact (target)
+      - name: 'Debug: show target contents before upload'
+        if: always()
+        run: |
+          echo "---- target (before upload) ----"
+          du -sh target || true
+          ls -la target || true
+          echo "---- target/classes exists? ----"
+          if [ -d target/classes ]; then echo "YES"; else echo "NO"; fi
+
+      - name: Ensure project packaged (generate target/classes)
+        if: always()
+        run: |
+          echo "Packaging project to ensure target/classes exists"
+          mvn -B -DskipTests=true package || true
+          echo "After package:" && ls -la target/classes || true
+
+      - name: Archive target (tar.gz) before upload
+        if: always()
+        run: |
+          if [ -d target ]; then 
+            tar -czf target.tar.gz target || true
+            echo "Created target.tar.gz" && ls -la target.tar.gz || true
+          else
+            echo "No target folder to archive"
+          fi
+
+      - name: Upload build artifact (target.tar.gz)
         uses: actions/upload-artifact@v4
         with:
           name: target
-          path: target
+          path: target.tar.gz
 
   sonar-analysis:
     needs: test
@@ -53,10 +79,24 @@ jobs:
           name: target
           path: .
 
-      - name: List workspace (debug)
+      - name: Extract target.tar.gz (if present)
         run: |
-          echo "Workspace content:" && ls -la
-          echo "Target content:" && ls -la target || true
+          if [ -f target.tar.gz ]; then 
+            tar -xzf target.tar.gz || true
+            echo "Extracted target.tar.gz" && ls -la target || true
+          else
+            echo "No target.tar.gz found to extract"
+          fi
+
+      - name: Debug: list workspace & target after download
+        run: |
+          echo "---- workspace ----"
+          ls -la
+          echo "---- target ----"
+          du -sh target || true
+          ls -la target || true
+          echo "---- target/classes ----"
+          if [ -d target/classes ]; then echo "FOUND: target/classes" && ls -la target/classes || true; else echo "MISSING: target/classes"; fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -71,17 +111,27 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
 
-      - name: Run SonarCloud analysis
+      - name: Run SonarCloud analysis (use artifact if present, else repackage)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
         run: |
-          mvn -B -DskipTests=true sonar:sonar \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.java.binaries=target/classes
+          if [ -d target/classes ]; then
+            echo "Using downloaded classes for Sonar analysis"
+            mvn -B -DskipTests=true sonar:sonar \
+              -Dsonar.host.url=$SONAR_HOST_URL \
+              -Dsonar.token=$SONAR_TOKEN \
+              -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+              -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+              -Dsonar.java.binaries=target/classes
+          else
+            echo "target/classes not found — packaging project before Sonar"
+            mvn -B -DskipTests=true package sonar:sonar \
+              -Dsonar.host.url=$SONAR_HOST_URL \
+              -Dsonar.token=$SONAR_TOKEN \
+              -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+              -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+          fi
 
       - name: Wait for SonarCloud Quality Gate
         uses: sonarsource/sonarcloud-github-action@master
