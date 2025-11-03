@@ -115,9 +115,81 @@ jobs:
           fi
 
       - name: Wait for SonarCloud Quality Gate
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
-        with:
-          args: target/sonar/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+        run: |
+          set -e
+          # ensure jq is available
+          if ! command -v jq >/dev/null 2>&1; then
+            echo "jq not found, installing..."
+            sudo apt-get update -y && sudo apt-get install -y jq
+          fi
+          REPORT=target/sonar/report-task.txt
+          if [ ! -f "$REPORT" ]; then
+            echo "report-task.txt not found at $REPORT"
+            echo "Directory listing:" && ls -la target/sonar || true
+            exit 1
+          fi
+          echo "Found report-task.txt:" && cat $REPORT
+          # Prefer explicit ceTaskId if present
+          CE_ID=$(grep -E '^ceTaskId=' $REPORT | cut -d'=' -f2)
+          if [ -n "$CE_ID" ]; then
+            echo "Found ceTaskId: $CE_ID"
+          else
+            CE_URL=$(grep -E '^ceTaskUrl=' $REPORT | cut -d'=' -f2-)
+            echo "Found ceTaskUrl: $CE_URL"
+            if [ -z "$CE_URL" ]; then
+              echo "ceTaskUrl not found in report-task.txt" && exit 1
+            fi
+            # extract id parameter robustly
+            CE_ID=$(echo "$CE_URL" | sed -E 's/.*[?&]id=([^&]+).*/\1/')
+            if [ -z "$CE_ID" ]; then
+              CE_ID=${CE_URL##*=}
+            fi
+            echo "Parsed CE_ID from URL: $CE_ID"
+          fi
+          if [ -z "$CE_ID" ]; then
+            echo "Could not determine CE task id" && exit 1
+          fi
+          echo "Waiting for Compute Engine task: $CE_ID"
+          # Poll CE task status (retries configurable)
+          MAX_RETRIES=60
+          SLEEP_SECONDS=5
+          status=null
+          for i in $(seq 1 $MAX_RETRIES); do
+            echo "Poll #$i"
+            resp=$(curl -s -u "$SONAR_TOKEN": "$SONAR_HOST_URL/api/ce/task?id=$CE_ID")
+            echo "Raw CE resp: ${resp}"
+            # if resp contains errors, print and retry
+            errMsg=$(echo "$resp" | jq -r '.errors[0].msg // empty')
+            if [ -n "$errMsg" ]; then
+              echo "CE API returned error: $errMsg -- will retry"
+              status=null
+            else
+              status=$(echo "$resp" | jq -r '.task.status // empty')
+            fi
+            echo "CE status: $status"
+            if [ "$status" = "SUCCESS" ] || [ "$status" = "FAILED" ] || [ "$status" = "CANCELED" ]; then
+              break
+            fi
+            sleep $SLEEP_SECONDS
+          done
+          echo "Final CE response: $resp"
+          if [ "$status" != "SUCCESS" ]; then
+            echo "Analysis task did not finish successfully: $status"
+            echo "CE response: $resp"
+            exit 1
+          fi
+          ANALYSIS_ID=$(echo "$resp" | jq -r '.task.analysisId')
+          echo "Analysis id: $ANALYSIS_ID"
+          # Get quality gate status
+          qresp=$(curl -s -u "$SONAR_TOKEN": "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId=$ANALYSIS_ID")
+          gate=$(echo "$qresp" | jq -r '.projectStatus.status')
+          echo "Quality gate status: $gate"
+          echo "$qresp" | jq '.' || true
+          if [ "$gate" != "OK" ]; then
+            echo "Quality Gate failed: $gate"
+            exit 1
+          fi
+
