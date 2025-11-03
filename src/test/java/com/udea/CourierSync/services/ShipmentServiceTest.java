@@ -46,6 +46,12 @@ class ShipmentServiceTest {
     void createShipment_shouldThrow_whenClientIdNull() {
         ShipmentDTO dto = new ShipmentDTO();
         dto.setClient(new ClientDTO());
+
+        // Si el mapper devuelve null, el servicio lanzará NPE. Mockear el mapper para devolver una entidad
+        Shipment s = new Shipment();
+        s.setClient(null); // simula que el mapper no llenó client id
+        when(shipmentMapper.toEntity(dto)).thenReturn(s);
+
         assertThrows(BadRequestException.class, () -> shipmentService.createShipment(dto));
     }
 
@@ -57,6 +63,10 @@ class ShipmentServiceTest {
         dto.setClient(cdto);
 
         Shipment s = new Shipment();
+        Client mappedClient = new Client();
+        mappedClient.setId(5L); // important: mapper returns an entity with client id set
+        s.setClient(mappedClient);
+
         when(shipmentMapper.toEntity(dto)).thenReturn(s);
         when(clientRepository.findById(5L)).thenReturn(Optional.empty());
 
@@ -71,12 +81,14 @@ class ShipmentServiceTest {
         dto.setClient(cdto);
 
         Shipment s = new Shipment();
-        s.setClient(new Client());
+        Client mappedClient = new Client();
+        mappedClient.setId(1L); // mapper returns entity with client id
+        s.setClient(mappedClient);
         Shipment saved = new Shipment();
         saved.setTrackingCode("CS1234567");
 
         when(shipmentMapper.toEntity(dto)).thenReturn(s);
-        when(clientRepository.findById(1L)).thenReturn(Optional.of(new Client()));
+        when(clientRepository.findById(1L)).thenReturn(Optional.of(mappedClient));
         when(shipmentRepository.save(any(Shipment.class))).thenReturn(saved);
         when(shipmentMapper.toDTO(saved)).thenReturn(dto);
 
@@ -121,4 +133,3 @@ class ShipmentServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> shipmentService.updateStatus(9L, ShipmentStatus.ENTREGADO, null));
     }
 }
-
