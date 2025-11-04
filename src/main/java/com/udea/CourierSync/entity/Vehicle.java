@@ -1,4 +1,4 @@
-package com.udea.CourierSync.entity;
+package com.udea.couriersync.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

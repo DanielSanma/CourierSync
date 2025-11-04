@@ -1,4 +1,4 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.CourierSync.services.ShipmentService;
-import com.udea.CourierSync.DTO.ShipmentDTO;
-import com.udea.CourierSync.enums.ShipmentStatus;
+import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.enums.ShipmentStatus;
+import com.udea.couriersync.services.ShipmentService;
 
 import java.util.List;
 

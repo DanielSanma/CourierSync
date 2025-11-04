@@ -1,4 +1,4 @@
-package com.udea.CourierSync;
+package com.udea.couriersync;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

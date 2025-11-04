@@ -1,4 +1,4 @@
-package com.udea.CourierSync.exception;
+package com.udea.couriersync.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
   public ResourceNotFoundException() {

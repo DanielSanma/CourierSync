@@ -1,4 +1,4 @@
-package com.udea.CourierSync;
+package com.udea.couriersync;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

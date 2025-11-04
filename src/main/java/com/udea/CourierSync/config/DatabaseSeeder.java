@@ -1,4 +1,4 @@
-package com.udea.CourierSync.config;
+package com.udea.couriersync.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.udea.CourierSync.entity.User;
-import com.udea.CourierSync.enums.UserRole;
-import com.udea.CourierSync.repository.UserRepository;
+import com.udea.couriersync.entity.User;
+import com.udea.couriersync.enums.UserRole;
+import com.udea.couriersync.repository.UserRepository;
 
 @Component
 public class DatabaseSeeder {

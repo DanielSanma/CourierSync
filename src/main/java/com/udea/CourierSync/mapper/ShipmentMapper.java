@@ -1,9 +1,10 @@
-package com.udea.CourierSync.mapper;
+package com.udea.couriersync.mapper;
 
-import com.udea.CourierSync.DTO.ShipmentDTO;
-import com.udea.CourierSync.entity.Shipment;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.entity.Shipment;
 
 @Mapper(componentModel = "spring", uses = { ClientMapper.class, VehicleMapper.class}) 
 public interface ShipmentMapper {

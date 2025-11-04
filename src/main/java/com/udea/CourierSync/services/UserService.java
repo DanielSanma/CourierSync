@@ -1,17 +1,17 @@
-package com.udea.CourierSync.services;
+package com.udea.couriersync.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.udea.CourierSync.repository.UserRepository;
-import com.udea.CourierSync.mapper.UserMapper;
-import com.udea.CourierSync.DTO.UserDTO;
-import com.udea.CourierSync.entity.User;
+import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.entity.User;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.UserMapper;
+import com.udea.couriersync.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
 
 @Service
 public class UserService {

@@ -1,4 +1,4 @@
-package com.udea.CourierSync.security;
+package com.udea.couriersync.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.udea.CourierSync.entity.User;
-import com.udea.CourierSync.repository.UserRepository;
+import com.udea.couriersync.entity.User;
+import com.udea.couriersync.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

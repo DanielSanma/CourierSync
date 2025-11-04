@@ -1,23 +1,23 @@
-package com.udea.CourierSync.coverage;
+package com.udea.couriersync.coverage;
 
-import com.udea.CourierSync.DTO.ClientDTO;
-import com.udea.CourierSync.DTO.ShipmentDTO;
-import com.udea.CourierSync.DTO.UserDTO;
-import com.udea.CourierSync.DTO.VehicleDTO;
-import com.udea.CourierSync.entity.Client;
-import com.udea.CourierSync.entity.Shipment;
-import com.udea.CourierSync.entity.User;
-import com.udea.CourierSync.entity.Vehicle;
-import com.udea.CourierSync.enums.ShipmentPriority;
-import com.udea.CourierSync.enums.ShipmentStatus;
-import com.udea.CourierSync.enums.UserRole;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ConflictException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
 import com.udea.CourierSync.mapper.ClientMapperImpl;
 import com.udea.CourierSync.mapper.ShipmentMapperImpl;
 import com.udea.CourierSync.mapper.UserMapperImpl;
 import com.udea.CourierSync.mapper.VehicleMapperImpl;
+import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.DTO.VehicleDTO;
+import com.udea.couriersync.entity.Client;
+import com.udea.couriersync.entity.Shipment;
+import com.udea.couriersync.entity.User;
+import com.udea.couriersync.entity.Vehicle;
+import com.udea.couriersync.enums.ShipmentPriority;
+import com.udea.couriersync.enums.ShipmentStatus;
+import com.udea.couriersync.enums.UserRole;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ConflictException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
 
 import org.junit.jupiter.api.Test;
 

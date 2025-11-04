@@ -1,4 +1,4 @@
-package com.udea.CourierSync.config;
+package com.udea.couriersync.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.udea.CourierSync.security.JwtAuthenticationFilter;
+import com.udea.couriersync.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity

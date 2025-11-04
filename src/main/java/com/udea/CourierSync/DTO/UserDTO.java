@@ -1,6 +1,6 @@
-package com.udea.CourierSync.DTO;
+package com.udea.couriersync.DTO;
 
-import com.udea.CourierSync.enums.UserRole;
+import com.udea.couriersync.enums.UserRole;
 
 public class UserDTO {
     private Long id;

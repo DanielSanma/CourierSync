@@ -1,13 +1,13 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
-import com.udea.CourierSync.exception.ConflictException;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ConflictException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
 
 import java.util.Map;
 

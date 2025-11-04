@@ -1,9 +1,10 @@
-package com.udea.CourierSync.mapper;
+package com.udea.couriersync.mapper;
 
-import com.udea.CourierSync.DTO.ClientDTO;
-import com.udea.CourierSync.entity.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.entity.Client;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {

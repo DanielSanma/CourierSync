@@ -1,8 +1,9 @@
-package com.udea.CourierSync.entity;
+package com.udea.couriersync.entity;
 
-import com.udea.CourierSync.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.udea.couriersync.enums.UserRole;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

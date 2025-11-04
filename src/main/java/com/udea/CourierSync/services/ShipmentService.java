@@ -1,20 +1,22 @@
-package com.udea.CourierSync.services;
+package com.udea.couriersync.services;
 
-import com.udea.CourierSync.repository.ShipmentRepository;
-import com.udea.CourierSync.repository.ClientRepository;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.udea.CourierSync.entity.Shipment;
-import com.udea.CourierSync.entity.Client;
-import com.udea.CourierSync.mapper.ShipmentMapper;
-import com.udea.CourierSync.DTO.ShipmentDTO;
+
+import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.entity.Client;
+import com.udea.couriersync.entity.Shipment;
+import com.udea.couriersync.entity.StatusHistory;
+import com.udea.couriersync.enums.ShipmentStatus;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.ShipmentMapper;
+import com.udea.couriersync.repository.ClientRepository;
+import com.udea.couriersync.repository.ShipmentRepository;
+
 import java.util.List;
 import java.util.Optional;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
-import com.udea.CourierSync.enums.ShipmentStatus;
-import com.udea.CourierSync.entity.StatusHistory;
 
 @Service
 public class ShipmentService {

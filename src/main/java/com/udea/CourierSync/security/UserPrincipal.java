@@ -1,9 +1,11 @@
-package com.udea.CourierSync.security;
+package com.udea.couriersync.security;
 
-import com.udea.CourierSync.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.udea.couriersync.entity.User;
+
 import java.util.Collection;
 import java.util.Collections;
 

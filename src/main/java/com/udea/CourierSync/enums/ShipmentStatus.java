@@ -1,4 +1,4 @@
-package com.udea.CourierSync.enums;
+package com.udea.couriersync.enums;
 
 public enum ShipmentStatus {
   REGISTRADO,

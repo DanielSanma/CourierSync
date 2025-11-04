@@ -1,4 +1,4 @@
-package com.udea.CourierSync.security;
+package com.udea.couriersync.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

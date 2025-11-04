@@ -1,4 +1,4 @@
-package com.udea.CourierSync.security;
+package com.udea.couriersync.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

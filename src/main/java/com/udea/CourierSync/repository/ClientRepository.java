@@ -1,8 +1,9 @@
-package com.udea.CourierSync.repository;
+package com.udea.couriersync.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.udea.CourierSync.entity.Client;
+
+import com.udea.couriersync.entity.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {

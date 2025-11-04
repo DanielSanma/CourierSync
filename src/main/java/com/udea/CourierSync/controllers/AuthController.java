@@ -1,4 +1,4 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,8 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.CourierSync.DTO.LoginRequest;
-import com.udea.CourierSync.security.JwtTokenProvider;
+import com.udea.couriersync.DTO.LoginRequest;
+import com.udea.couriersync.security.JwtTokenProvider;
 
 import java.util.Map;
 

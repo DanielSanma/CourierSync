@@ -1,4 +1,4 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.udea.CourierSync.repository.ShipmentRepository;
-import com.udea.CourierSync.repository.ClientRepository;
-import com.udea.CourierSync.repository.UserRepository;
+import com.udea.couriersync.repository.ClientRepository;
+import com.udea.couriersync.repository.ShipmentRepository;
+import com.udea.couriersync.repository.UserRepository;
 
 import java.util.Map;
 

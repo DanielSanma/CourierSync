@@ -1,17 +1,18 @@
-package com.udea.CourierSync.services;
-
-import com.udea.CourierSync.DTO.ClientDTO;
-import com.udea.CourierSync.entity.Client;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
-import com.udea.CourierSync.mapper.ClientMapper;
-import com.udea.CourierSync.repository.ClientRepository;
+package com.udea.couriersync.services;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.entity.Client;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.ClientMapper;
+import com.udea.couriersync.repository.ClientRepository;
+import com.udea.couriersync.services.ClientService;
 
 import java.util.List;
 import java.util.Optional;
@@ -95,7 +96,7 @@ class ClientServiceTest {
         when(clientMapper.toDTO(c1)).thenReturn(new ClientDTO());
         when(clientMapper.toDTO(c2)).thenReturn(new ClientDTO());
 
-        List<com.udea.CourierSync.DTO.ClientDTO> all = clientService.findAll();
+        List<com.udea.couriersync.DTO.ClientDTO> all = clientService.findAll();
         assertEquals(2, all.size());
         verify(clientRepository).findAll();
     }

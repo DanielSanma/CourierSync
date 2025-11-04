@@ -1,8 +1,9 @@
-package com.udea.CourierSync.entity;
+package com.udea.couriersync.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.udea.CourierSync.enums.ShipmentStatus;
+import com.udea.couriersync.enums.ShipmentStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

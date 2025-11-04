@@ -1,7 +1,7 @@
-package com.udea.CourierSync.DTO;
+package com.udea.couriersync.DTO;
 
-import com.udea.CourierSync.enums.ShipmentPriority;
-import com.udea.CourierSync.enums.ShipmentStatus;
+import com.udea.couriersync.enums.ShipmentPriority;
+import com.udea.couriersync.enums.ShipmentStatus;
 
 public class ShipmentDTO {
     private Long id;

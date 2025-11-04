@@ -1,17 +1,17 @@
-package com.udea.CourierSync.services;
+package com.udea.couriersync.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.udea.CourierSync.repository.VehicleRepository;
-import com.udea.CourierSync.mapper.VehicleMapper;
-import com.udea.CourierSync.DTO.VehicleDTO;
-import com.udea.CourierSync.entity.Vehicle;
+import com.udea.couriersync.DTO.VehicleDTO;
+import com.udea.couriersync.entity.Vehicle;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.VehicleMapper;
+import com.udea.couriersync.repository.VehicleRepository;
 
 import java.util.List;
 import java.util.Optional;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
 
 @Service
 public class VehicleService {

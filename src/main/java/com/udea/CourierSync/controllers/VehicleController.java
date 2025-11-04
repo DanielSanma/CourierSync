@@ -1,11 +1,12 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.udea.CourierSync.services.VehicleService;
-import com.udea.CourierSync.DTO.VehicleDTO;
+
+import com.udea.couriersync.DTO.VehicleDTO;
+import com.udea.couriersync.services.VehicleService;
 
 import java.util.List;
 

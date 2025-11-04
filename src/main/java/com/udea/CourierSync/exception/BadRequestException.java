@@ -1,4 +1,4 @@
-package com.udea.CourierSync.exception;
+package com.udea.couriersync.exception;
 
 public class BadRequestException extends RuntimeException {
   public BadRequestException() {

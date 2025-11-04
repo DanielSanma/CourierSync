@@ -1,17 +1,18 @@
-package com.udea.CourierSync.services;
-
-import com.udea.CourierSync.DTO.UserDTO;
-import com.udea.CourierSync.entity.User;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
-import com.udea.CourierSync.mapper.UserMapper;
-import com.udea.CourierSync.repository.UserRepository;
+package com.udea.couriersync.services;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.entity.User;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.UserMapper;
+import com.udea.couriersync.repository.UserRepository;
+import com.udea.couriersync.services.UserService;
 
 import java.util.List;
 import java.util.Optional;

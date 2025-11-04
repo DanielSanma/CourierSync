@@ -1,4 +1,4 @@
-package com.udea.CourierSync.controllers;
+package com.udea.couriersync.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.CourierSync.services.UserService;
-import com.udea.CourierSync.DTO.UserDTO;
-import com.udea.CourierSync.DTO.SignUpRequest;
+import com.udea.couriersync.DTO.SignUpRequest;
+import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.services.UserService;
 
 import java.util.List;
 

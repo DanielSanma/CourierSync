@@ -1,17 +1,17 @@
-package com.udea.CourierSync.services;
+package com.udea.couriersync.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.udea.CourierSync.repository.ClientRepository;
-import com.udea.CourierSync.mapper.ClientMapper;
-import com.udea.CourierSync.DTO.ClientDTO;
-import com.udea.CourierSync.entity.Client;
+import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.entity.Client;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.ClientMapper;
+import com.udea.couriersync.repository.ClientRepository;
 
 import java.util.List;
 import java.util.Optional;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
 
 @Service
 public class ClientService {

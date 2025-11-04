@@ -1,17 +1,18 @@
-package com.udea.CourierSync.services;
-
-import com.udea.CourierSync.DTO.VehicleDTO;
-import com.udea.CourierSync.entity.Vehicle;
-import com.udea.CourierSync.exception.BadRequestException;
-import com.udea.CourierSync.exception.ResourceNotFoundException;
-import com.udea.CourierSync.mapper.VehicleMapper;
-import com.udea.CourierSync.repository.VehicleRepository;
+package com.udea.couriersync.services;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.udea.couriersync.DTO.VehicleDTO;
+import com.udea.couriersync.entity.Vehicle;
+import com.udea.couriersync.exception.BadRequestException;
+import com.udea.couriersync.exception.ResourceNotFoundException;
+import com.udea.couriersync.mapper.VehicleMapper;
+import com.udea.couriersync.repository.VehicleRepository;
+import com.udea.couriersync.services.VehicleService;
 
 import java.util.List;
 import java.util.Optional;
