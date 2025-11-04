@@ -1,9 +1,9 @@
 package com.udea.couriersync.coverage;
 
-import com.udea.CourierSync.mapper.ClientMapperImpl;
-import com.udea.CourierSync.mapper.ShipmentMapperImpl;
-import com.udea.CourierSync.mapper.UserMapperImpl;
-import com.udea.CourierSync.mapper.VehicleMapperImpl;
+import com.udea.couriersync.mapper.ClientMapperImpl;
+import com.udea.couriersync.mapper.ShipmentMapperImpl;
+import com.udea.couriersync.mapper.UserMapperImpl;
+import com.udea.couriersync.mapper.VehicleMapperImpl;
 import com.udea.couriersync.DTO.ClientDTO;
 import com.udea.couriersync.DTO.ShipmentDTO;
 import com.udea.couriersync.DTO.UserDTO;
