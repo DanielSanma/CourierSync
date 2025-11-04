@@ -98,21 +98,22 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_ORG: ${{ secrets.SONAR_ORG }}
         run: |
           if [ -d target/classes ]; then
             mvn -B -DskipTests=true sonar:sonar \
               -Dsonar.host.url=$SONAR_HOST_URL \
               -Dsonar.token=$SONAR_TOKEN \
-              -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+              -Dsonar.organization=$SONAR_ORG \
               -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-              -Dsonar.java.binaries=target/classes
+              -Dsonar.java.binaries=target/classes \
               -Dsonar.branch.name=master
           else
             mvn -B -DskipTests=true package sonar:sonar \
               -Dsonar.host.url=$SONAR_HOST_URL \
               -Dsonar.token=$SONAR_TOKEN \
-              -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-              -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+              -Dsonar.organization=$SONAR_ORG \
+              -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
               -Dsonar.branch.name=master
           fi
 
