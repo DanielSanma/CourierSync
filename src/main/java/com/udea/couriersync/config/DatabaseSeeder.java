@@ -48,15 +48,25 @@ public class DatabaseSeeder {
     if (adminCount == 0) {
       try {
         logger.info("Creating admin user...");
+
+        // ✅ Leer contraseña desde variable de entorno
+        String adminPassword = System.getenv("ADMIN_DEFAULT_PASSWORD");
+
+        if (adminPassword == null || adminPassword.isBlank()) {
+          logger.error("ADMIN_DEFAULT_PASSWORD no está configurada. Abortando creación del usuario admin.");
+          throw new IllegalStateException("ADMIN_DEFAULT_PASSWORD no configurada en el entorno.");
+        }
+
         User adminUser = new User();
         adminUser.setName("Admin");
         adminUser.setEmail(adminEmail);
-        adminUser.setPassword(passwordEncoder.encode("admin123"));
+        adminUser.setPassword(passwordEncoder.encode(adminPassword));
         adminUser.setRole(UserRole.ADMIN);
         adminUser.setPhone("1234567890");
 
         userRepository.save(adminUser);
         logger.info("Admin user created successfully");
+
       } catch (Exception e) {
         logger.error("Error creating admin user: {}", e.getMessage());
         logger.error("Stack trace: ", e);
@@ -66,3 +76,4 @@ public class DatabaseSeeder {
     }
   }
 }
+
