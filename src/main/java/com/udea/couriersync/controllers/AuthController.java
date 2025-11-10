@@ -24,27 +24,43 @@ import java.util.Map;
 @Tag(name = "Authentication", description = "Authentication management APIs")
 public class AuthController {
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-  @Autowired
-  private JwtTokenProvider tokenProvider;
+    @Autowired
+    private JwtTokenProvider tokenProvider;
 
-  @Operation(summary = "Login user", description = "Authenticates a user and returns a JWT token")
-  @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Successfully authenticated", content = @Content(schema = @Schema(implementation = Map.class))),
-      @ApiResponse(responseCode = "401", description = "Invalid credentials"),
-  })
-  @PostMapping("/login")
-  public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-    Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            loginRequest.getEmail(),
-            loginRequest.getPassword()));
+    @Operation(summary = "Login user", description = "Authenticates a user and returns a JWT token")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Successfully authenticated",
+            content = @Content(
+                schema = @Schema(
+                    implementation = AuthResponse.class
+                )
+            )
+        ),
+        @ApiResponse(responseCode = "401", description = "Invalid credentials"),
+    })
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                loginRequest.getEmail(),
+                loginRequest.getPassword()
+            )
+        );
 
-    SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    String jwt = tokenProvider.generateToken(authentication);
-    return ResponseEntity.ok(Map.of("accessToken", jwt));
-  }
+        String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(Map.of("accessToken", jwt));
+    }
+
+    // Clase auxiliar para documentación en Swagger
+    static class AuthResponse {
+        @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...")
+        public String accessToken;
+    }
 }
