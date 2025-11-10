@@ -34,6 +34,10 @@
 		<junit.jupiter.version>5.9.3</junit.jupiter.version>
 		<jacoco.version>0.8.10</jacoco.version>
 		<sonar.plugin.version>3.10.0.2594</sonar.plugin.version>
+
+		<sonar.projectKey>DanielSanma_CourierSync</sonar.projectKey>
+        <sonar.organization>danielsanma</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
