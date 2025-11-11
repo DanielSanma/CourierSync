@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,11 +23,25 @@ import java.util.Map;
 @Tag(name = "Authentication", description = "Authentication management APIs")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    // --- CORRECCIÓN: Se eliminan los @Autowired de campo ---
 
-    @Autowired
-    private JwtTokenProvider tokenProvider;
+    // 1. Declarar los campos como final (buena práctica)
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider tokenProvider;
+
+    /**
+     * 2. Constructor para inyección de dependencias.
+     * Spring Boot (a partir de la versión 2.x) inyecta automáticamente
+     * las dependencias en un constructor si solo hay uno, por lo que
+     * no se necesita @Autowired aquí.
+     */
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider) {
+        this.authenticationManager = authenticationManager;
+        this.tokenProvider = tokenProvider;
+    }
+    
+    // --- FIN DE LA CORRECCIÓN ---
+
 
     @Operation(summary = "Login user", description = "Authenticates a user and returns a JWT token")
     @ApiResponses(value = {
