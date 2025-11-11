@@ -1,6 +1,5 @@
 package com.udea.couriersync.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +11,19 @@ import com.udea.couriersync.repository.UserRepository;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    // --- CORRECCIÓN: Inyección por Constructor ---
+
+    // Declaramos el campo como final
+    private final UserRepository userRepository;
+
+    /**
+     * Constructor para inyectar la dependencia UserRepository.
+     */
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // --- FIN DE LA CORRECCIÓN ---
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
