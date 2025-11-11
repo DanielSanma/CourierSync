@@ -1,4 +1,4 @@
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=garcialvarez_CourierSync)](https://sonarcloud.io/summary/new_code?id=garcialvarez_CourierSync)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=garcialvarez_CourierSync)](https://sonarcloud.io/summary/new_code?id=DanielSanma_CourierSync&branch=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=garcialvarez_CourierSync&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=garcialvarez_CourierSync)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=garcialvarez_CourierSync&metric=coverage)](https://sonarcloud.io/summary/new_code?id=garcialvarez_CourierSync)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=garcialvarez_CourierSync&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=garcialvarez_CourierSync)
