@@ -1,6 +1,5 @@
 package com.udea.couriersync.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,24 +16,36 @@ import java.util.Map;
 @PreAuthorize("hasRole('ADMIN')")
 public class DashboardController {
 
-  @Autowired
-  private ShipmentRepository shipmentRepository;
+    // --- CORRECCIÓN: Se eliminan los @Autowired de campo y se declaran como final ---
 
-  @Autowired
-  private ClientRepository clientRepository;
+    private final ShipmentRepository shipmentRepository;
+    private final ClientRepository clientRepository;
+    private final UserRepository userRepository;
 
-  @Autowired
-  private UserRepository userRepository;
+    /**
+     * Constructor para la Inyección de Dependencias.
+     * Spring inyecta automáticamente las implementaciones de los repositorios.
+     */
+    public DashboardController(
+            ShipmentRepository shipmentRepository,
+            ClientRepository clientRepository,
+            UserRepository userRepository) {
+        this.shipmentRepository = shipmentRepository;
+        this.clientRepository = clientRepository;
+        this.userRepository = userRepository;
+    }
 
-  @GetMapping("/metrics")
-  public Map<String, Object> metrics() {
-    long shipments = shipmentRepository.count();
-    long clients = clientRepository.count();
-    long users = userRepository.count();
+    // --- FIN DE LA CORRECCIÓN ---
 
-    return Map.of(
-        "shipments", shipments,
-        "clients", clients,
-        "users", users);
-  }
+    @GetMapping("/metrics")
+    public Map<String, Object> metrics() {
+        long shipments = shipmentRepository.count();
+        long clients = clientRepository.count();
+        long users = userRepository.count();
+
+        return Map.of(
+            "shipments", shipments,
+            "clients", clients,
+            "users", users);
+    }
 }
