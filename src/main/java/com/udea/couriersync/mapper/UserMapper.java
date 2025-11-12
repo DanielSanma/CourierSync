@@ -3,7 +3,7 @@ package com.udea.couriersync.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.dto.UserDTO;
 import com.udea.couriersync.entity.User;
 
 @Mapper(componentModel = "spring")

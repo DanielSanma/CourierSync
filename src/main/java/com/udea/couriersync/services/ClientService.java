@@ -2,7 +2,7 @@ package com.udea.couriersync.services;
 
 import org.springframework.stereotype.Service;
 
-import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.dto.ClientDTO;
 import com.udea.couriersync.entity.Client;
 import com.udea.couriersync.exception.BadRequestException;
 import com.udea.couriersync.exception.ResourceNotFoundException;

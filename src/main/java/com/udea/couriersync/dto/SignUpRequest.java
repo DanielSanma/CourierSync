@@ -1,4 +1,4 @@
-package com.udea.couriersync.DTO;
+package com.udea.couriersync.dto;
 
 import com.udea.couriersync.enums.UserRole;
 

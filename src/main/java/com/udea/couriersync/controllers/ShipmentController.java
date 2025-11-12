@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.dto.ShipmentDTO;
 import com.udea.couriersync.enums.ShipmentStatus;
 import com.udea.couriersync.services.ShipmentService;
 

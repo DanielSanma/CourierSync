@@ -1,4 +1,4 @@
-package com.udea.couriersync.DTO;
+package com.udea.couriersync.dto;
 
 public class ClientDTO {
   private Long id;

@@ -1,4 +1,4 @@
-package com.udea.couriersync.DTO;
+package com.udea.couriersync.dto;
 
 public class VehicleDTO {
   private Long id;

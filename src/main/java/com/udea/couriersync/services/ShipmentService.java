@@ -3,7 +3,7 @@ package com.udea.couriersync.services;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.stereotype.Service;
 
-import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.dto.ShipmentDTO;
 import com.udea.couriersync.entity.Client;
 import com.udea.couriersync.entity.Shipment;
 import com.udea.couriersync.entity.StatusHistory;

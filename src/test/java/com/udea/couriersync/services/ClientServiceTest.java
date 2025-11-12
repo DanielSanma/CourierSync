@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.udea.couriersync.DTO.ClientDTO;
+import com.udea.couriersync.dto.ClientDTO;
 import com.udea.couriersync.entity.Client;
 import com.udea.couriersync.exception.BadRequestException;
 import com.udea.couriersync.exception.ResourceNotFoundException;
@@ -96,7 +96,7 @@ class ClientServiceTest {
         when(clientMapper.toDTO(c1)).thenReturn(new ClientDTO());
         when(clientMapper.toDTO(c2)).thenReturn(new ClientDTO());
 
-        List<com.udea.couriersync.DTO.ClientDTO> all = clientService.findAll();
+        List<com.udea.couriersync.dto.ClientDTO> all = clientService.findAll();
         assertEquals(2, all.size());
         verify(clientRepository).findAll();
     }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.couriersync.DTO.VehicleDTO;
+import com.udea.couriersync.dto.VehicleDTO;
 import com.udea.couriersync.services.VehicleService;
 
 import java.util.List;

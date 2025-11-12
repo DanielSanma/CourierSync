@@ -6,8 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.udea.couriersync.DTO.ClientDTO;
-import com.udea.couriersync.DTO.ShipmentDTO;
+import com.udea.couriersync.dto.ClientDTO;
+import com.udea.couriersync.dto.ShipmentDTO;
 import com.udea.couriersync.entity.Client;
 import com.udea.couriersync.entity.Shipment;
 import com.udea.couriersync.enums.ShipmentStatus;

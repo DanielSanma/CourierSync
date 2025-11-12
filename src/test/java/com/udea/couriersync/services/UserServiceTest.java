@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.dto.UserDTO;
 import com.udea.couriersync.entity.User;
 import com.udea.couriersync.exception.BadRequestException;
 import com.udea.couriersync.exception.ResourceNotFoundException;

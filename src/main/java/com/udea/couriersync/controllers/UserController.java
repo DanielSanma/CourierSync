@@ -6,8 +6,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.udea.couriersync.DTO.SignUpRequest;
-import com.udea.couriersync.DTO.UserDTO;
+import com.udea.couriersync.dto.SignUpRequest;
+import com.udea.couriersync.dto.UserDTO;
 import com.udea.couriersync.services.UserService;
 
 import java.util.List;
